@@ -59,6 +59,7 @@ class PaymentController extends Controller
 
         // Step 5: Redirect to Payment Page
         if (isset($responseData['paymentPageUrl'])) {
+            dd($responseData['paymentPageUrl']);
             // Store reservation data in session to use after payment
             $request->session()->put('reservation', $reservation);
             return redirect($responseData['paymentPageUrl']);
@@ -67,20 +68,20 @@ class PaymentController extends Controller
         return back()->withErrors('Failed to initiate payment.');
     }
 
-    // Complete Payment and Save Member & Ticket Details
+    
     public function complete(Request $request)
     {
         $reqId = $request->input('reqid');
 
-        // Step 1: Send Payment Complete Request
+        
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . env('PAYCENTER_AUTH_TOKEN'),
             'Hmac' => hash_hmac('sha256', json_encode(['reqid' => $reqId]), env('PAYCENTER_HMAC_SECRET')),
         ])->post(env('PAYCENTER_ENDPOINT') . '/complete', ['reqid' => $reqId]);
 
         $responseData = $response->json();
-
-        // Step 2: Check Payment Status
+            dd($reqId);
+        
         if ($responseData['responseCode'] === '00') {
             // Step 3: Retrieve reservation data from session
             $reservation = session()->get('reservation');

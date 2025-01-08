@@ -61,12 +61,7 @@ class TicketController extends Controller
         }
 
         
-            // $uniqueReference = 'SBW' . str_pad(rand(1, 9999999), 7, '0', STR_PAD_LEFT);
-
-
-            // while (Ticket::where('other', $uniqueReference)->exists()) {
-            // $uniqueReference = 'SBW' . str_pad(rand(1, 9999999), 7, '0', STR_PAD_LEFT);
-            // }
+            
 
 
 

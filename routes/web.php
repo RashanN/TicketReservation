@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -20,6 +21,10 @@ Route::get('/payment/callback', [PaymentController::class, 'paymentCallback'])->
 
 Route::post('/payment/initiate', [PaymentController::class, 'initiate'])->name('payment.initiate');
 Route::post('/payment/complete', [PaymentController::class, 'complete'])->name('payment.complete');
+
+Route::get('/confirm-checking', [CheckinController::class, 'showConfirmationPage'])->name('confirm.checking');
+
+Route::post('/confirm-checking', [CheckinController::class, 'confirmCheckin'])->name('confirm.checkin');
 
 
 Route::get('admin/ticket', function () {

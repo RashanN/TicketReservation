@@ -434,6 +434,9 @@ function generateQRCode(ticketId, numberOfTickets) {
 
                 // After QR Code is generated, send it to the server
                 sendQRCodeToServer(ticketId, uniqueCode, qrCanvas.toDataURL('image/png'));
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000); 
             });
         }
     }

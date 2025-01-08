@@ -298,23 +298,34 @@
                                 <span class="badge bg-success">QR Codes Generated</span>
                             @else
                                 <button class="btn btn-primary" onclick="generateQRCode({{ $ticket->id }}, {{ $ticket->Numberof_ticket }})">
-                                    Generate QR Codes       
+                                    Generate QR Codes
                                 </button>
                             @endif
                         </td>
+                        
                         <td class="text-center">
                             @if ($ticket->IssuedStatus == '0')
                                 <form action="{{ route('admin.update.issued.status', $ticket->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to issue this ticket?');">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn-link p-0">
-                                        <i class="fas fa-times-circle text-danger"></i>
-                                    </button>
+                        
+                                    @if (!\App\Models\CoupenCode::where('ticket_id', $ticket->id)->exists())
+                                        <!-- Disable the button if QR codes are not generated -->
+                                        <button type="submit" class="btn btn-link p-0" disabled>
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </button>
+                                    @else
+                                        <!-- Enable the button if QR codes are generated -->
+                                        <button type="submit" class="btn btn-link p-0">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </button>
+                                    @endif
                                 </form>
                             @else
                                 <span class="badge bg-success">Done</span>
                             @endif
                         </td>
+                        
                         
                         <td class="text-center">
                             <form action="{{ route('admin.delete.ticket', $ticket->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
@@ -434,6 +445,9 @@ function generateQRCode(ticketId, numberOfTickets) {
 
                 // After QR Code is generated, send it to the server
                 sendQRCodeToServer(ticketId, uniqueCode, qrCanvas.toDataURL('image/png'));
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000); 
             });
         }
     }
