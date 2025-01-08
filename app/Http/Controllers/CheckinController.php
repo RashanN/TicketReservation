@@ -86,4 +86,12 @@ class CheckinController extends Controller
             return redirect()->back()->with('error', 'Check-in failed. Please try again.');
         }
     }
+    public function index()
+    {
+        $checkins = Checkin::with(['ticket', 'member', 'coupen'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+            
+        return view('checkin.index', compact('checkins'));
+    }
 }

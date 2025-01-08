@@ -136,10 +136,10 @@
             <a href="{{ route('admin.ticket') }}">
                 <i class="fas fa-users"></i> Reservation
             </a>
-            {{-- <a href="#">
-                <i class="fas fa-chart-bar"></i> Analytics
+            <a href="{{route('checkins.index')}}">
+                <i class="fas fa-chart-bar"></i> CheckIN
             </a>
-            <a href="#">
+            {{-- <a href="#">
                 <i class="fas fa-cog"></i> Settings
             </a> --}}
          

@@ -51,6 +51,8 @@ Route::patch('/admin/update-issued-status/{ticketId}', [TicketController::class,
      Route::delete('/admin/ticket/{id}', [TicketController::class, 'destroy'])->name('admin.delete.ticket');
 
      Route::post('/save-qr-code', [TicketController::class, 'saveQRCode']);
+     Route::get('/checkins', [CheckinController::class, 'index'])->name('checkins.index');
+     
 
 });
 
