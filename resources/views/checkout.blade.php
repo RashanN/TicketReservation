@@ -123,6 +123,7 @@
                                 Pay Now 
                             </button>
                         </div>
+                        <input type="hidden" name="total" value="{{ $grandTotal }}">
                     </form>
                 </div>
             </div>

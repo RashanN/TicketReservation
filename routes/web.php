@@ -18,6 +18,10 @@ Route::get('/checkout', [TicketController::class, 'checkout'])->name('checkout')
 Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
 Route::get('/payment/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback');
 
+Route::post('/payment/initiate', [PaymentController::class, 'initiate'])->name('payment.initiate');
+Route::post('/payment/complete', [PaymentController::class, 'complete'])->name('payment.complete');
+
+
 Route::get('admin/ticket', function () {
     return view('admin.ticket');
 })->name('admin.ticket');

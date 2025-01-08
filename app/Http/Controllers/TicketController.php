@@ -170,16 +170,10 @@ class TicketController extends Controller
         $ticket->delete();
 
       
-        if (Auth::user()->role == 'admin') {
-            
-            return redirect()->route('dashboard')->with('success', 'Ticket deleted successfully.');
-        } elseif (Auth::user()->role == 'superAdmin') {
-           
-            return redirect()->route('admin.dashboard')->with('success', 'Ticket deleted successfully.');
-        }
+        return redirect()->back()->with('success', 'Payment status updated successfully');
 
         
-        return redirect()->route('home')->with('success', 'Ticket deleted successfully.');
+       
     }
     public function storeDraft(Request $request)
     {
